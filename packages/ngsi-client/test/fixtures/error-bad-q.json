@@ -1,0 +1,12 @@
+{
+  "status": 500,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "type": "https://uri.etsi.org/ngsi-ld/errors/InternalError",
+    "title": "Internal error",
+    "detail": "The query could not be processed.",
+    "status": 500
+  }
+}

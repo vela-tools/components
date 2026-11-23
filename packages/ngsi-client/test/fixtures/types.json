@@ -1,0 +1,19 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "link": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.9.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+  },
+  "body": {
+    "id": "urn:ngsi-ld:EntityTypeList:1",
+    "type": "EntityTypeList",
+    "typeList": [
+      "https://example.org/vela/VirtualCameraSensor",
+      "https://smartdatamodels.org/dataModel.Transportation/TrafficFlowObserved",
+      "https://smartdatamodels.org/dataModel.Device/Camera",
+      "https://smartdatamodels.org/dataModel.Transportation/CrowdFlowObserved",
+      "https://smartdatamodels.org/dataModel.Environment/AirQualityObserved",
+      "https://smartdatamodels.org/dataModel.Parking/ParkingSpot"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+NgsiQueryInput
+QueryCondition
+QueryParseError
+buildNgsiQuery
+parseConditions
+parseNgsiQuery

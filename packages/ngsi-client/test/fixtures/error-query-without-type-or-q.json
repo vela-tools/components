@@ -1,0 +1,12 @@
+{
+  "status": 400,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "type": "https://uri.etsi.org/ngsi-ld/errors/InvalidRequest",
+    "title": "Invalid request.",
+    "detail": "A query needs at least an id, type, attrs, q or geo query.",
+    "status": 400
+  }
+}

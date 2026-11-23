@@ -1,0 +1,40 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+    schedule:
+      interval: "daily"
+    rebase-strategy: "auto"
+    labels: []
+    open-pull-requests-limit: 50
+    # TypeScript 7 drops the JavaScript compiler API (ts.createProgram) that scripts/check-exports.mjs and
+    # vite-plugin-dts use, and typescript-eslint accepts only typescript <6.1.0. Remove this entry once
+    # typescript-eslint supports TypeScript 7 and the type build and the API surface check run on it.
+    ignore:
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+    groups:
+      npm-minor:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+    schedule:
+      interval: "daily"
+    rebase-strategy: "auto"
+    labels: []
+    open-pull-requests-limit: 50
+    groups:
+      github-actions-minor:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

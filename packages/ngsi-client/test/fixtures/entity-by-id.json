@@ -1,0 +1,39 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "link": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.9.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+  },
+  "body": {
+    "id": "urn:ngsi-ld:VirtualCameraSensor:sensor-1",
+    "type": "https://example.org/vela/VirtualCameraSensor",
+    "https://smartdatamodels.org/name": {
+      "type": "Property",
+      "value": "Sensor 1"
+    },
+    "https://example.org/vela/hasDevice": {
+      "type": "Relationship",
+      "object": "urn:ngsi-ld:Camera:camera-1",
+      "objectType": "https://smartdatamodels.org/dataModel.Device/Camera"
+    },
+    "https://example.org/vela/headingName": {
+      "type": "Property",
+      "value": "outbound"
+    },
+    "https://example.org/vela/sensorType": {
+      "type": "Property",
+      "value": "pedestrianFlow"
+    },
+    "https://example.org/vela/separatorLine": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "LineString",
+        "coordinates": [
+          [10.0001, 50.0002],
+          [10.0003, 50.0001]
+        ]
+      },
+      "observedAt": "2026-01-01T00:00:00Z"
+    }
+  }
+}

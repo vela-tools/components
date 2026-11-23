@@ -1,0 +1,98 @@
+@keyframes vela-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.65);
+        opacity: 0.35;
+    }
+}
+
+.vela-pulse-dot {
+    animation: vela-pulse 1.4s ease-in-out infinite;
+}
+
+:root {
+    --vela-header-height: 2.75rem;
+    --vela-radius: 6px;
+    --vela-radius-lg: 10px;
+}
+
+[data-mantine-color-scheme="light"] {
+    --vela-color-bg: #fff;
+    --vela-color-bg2: #f9fafb;
+    --vela-color-bg3: #f3f4f6;
+    --vela-color-border: #e5e7eb;
+    --vela-color-border2: #d1d5db;
+    --vela-color-text: #111827;
+    --vela-color-text2: #374151;
+    --vela-color-text3: #6b7280;
+    --vela-color-text4: #9ca3af;
+
+    --vela-accent: #7c3aed;
+    --vela-accent-hover: #6d28d9;
+    --vela-accent-light: #ede4fe;
+    --vela-accent-muted: #c4b5fd;
+    --vela-accent-soft: #f5f0ff;
+
+    --vela-color-yellow-100: #fff3c4;
+    --vela-color-yellow-300: #fbbf24;
+    --vela-color-yellow-800: #b45309;
+
+    --vela-color-purple-100: #f5f0ff;
+    --vela-color-purple-300: #c4b5fd;
+    --vela-color-purple-800: #7c3aed;
+
+    --vela-color-green-700: #047857;
+    --vela-color-red-700: #b91c1c;
+
+    --vela-color-success: #16a34a;
+    --vela-color-warning: #d97706;
+    --vela-color-danger: #dc2626;
+    --vela-color-info: #2563eb;
+}
+
+[data-mantine-color-scheme="dark"] {
+    --vela-color-bg: #0f0f11;
+    --vela-color-bg2: #18181b;
+    --vela-color-bg3: #27272a;
+    --vela-color-border: #27272a;
+    --vela-color-border2: #3f3f46;
+    --vela-color-text: #f4f4f5;
+    --vela-color-text2: #d4d4d8;
+    --vela-color-text3: #a1a1aa;
+    --vela-color-text4: #71717a;
+
+    --vela-accent: #a970f5;
+    --vela-accent-hover: #8b5cf6;
+    --vela-accent-light: #2e1065;
+    --vela-accent-muted: #4c1d95;
+    --vela-accent-soft: #1a0840;
+
+    --vela-color-yellow-100: #1c1400;
+    --vela-color-yellow-300: #d97706;
+    --vela-color-yellow-800: #fcd34d;
+
+    --vela-color-purple-100: #1a0840;
+    --vela-color-purple-300: #4c1d95;
+    --vela-color-purple-800: #a970f5;
+
+    --vela-color-green-700: #6ee7b7;
+    --vela-color-red-700: #fca5a5;
+
+    --vela-color-success: #22c55e;
+    --vela-color-warning: #f59e0b;
+    --vela-color-danger: #f87171;
+    --vela-color-info: #3b82f6;
+}
+
+.vela-thin-scroll::-webkit-scrollbar {
+    width: 0.1875rem;
+    height: 0.1875rem;
+}
+.vela-thin-scroll::-webkit-scrollbar-thumb {
+    background: var(--vela-color-border2);
+    border-radius: 0.1875rem;
+}

@@ -1,0 +1,43 @@
+{
+  "name": "vela",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.20.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint && node scripts/check-parts-rule.mjs",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "audit:sources": "lockfile-lint && npm audit signatures",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "api:check": "node scripts/check-exports.mjs",
+    "api:update": "turbo run build && node scripts/check-exports.mjs --update",
+    "knip": "knip"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.14.0",
+    "knip": "^6.46.1",
+    "lockfile-lint": "^5.1.0",
+    "prettier": "^3.10.1",
+    "turbo": "^2.5.0",
+    "typescript": "^6.0.0",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^8.1.4",
+    "vite-plugin-dts": "^5.0.3"
+  },
+  "allowScripts": {
+    "fsevents": false
+  }
+}

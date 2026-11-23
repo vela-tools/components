@@ -1,0 +1,196 @@
+.root {
+    width: 264px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--vela-color-border);
+    background: var(--vela-color-bg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sectionHeader {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--vela-color-text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.types {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--vela-color-border);
+}
+
+.typeList {
+    height: 140px;
+    overflow-y: auto;
+}
+
+.typeRow {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 5px 12px;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.typeRow:hover {
+    background: var(--vela-color-bg2);
+}
+
+.typeRow[data-selected="true"] {
+    background: var(--vela-accent-light);
+}
+
+.typeDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.typeLabel {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.conditions {
+    padding: 8px 12px;
+}
+
+.conditionRows {
+    max-height: 90px;
+    overflow-y: auto;
+}
+
+.conditionInput {
+    background: var(--vela-color-bg3);
+    border: 1px solid var(--vela-color-border);
+    font-size: 11px;
+    height: 26px;
+}
+
+.queryText {
+    background: var(--vela-color-bg3);
+    border: 1px solid var(--vela-color-border);
+    font-size: 11px;
+    font-family: var(--mantine-font-family-monospace);
+    resize: none;
+}
+
+.preview {
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 10px;
+    color: var(--vela-color-text3);
+    word-break: break-all;
+}
+
+.error {
+    font-size: 11px;
+    color: var(--vela-color-red-700);
+}
+
+.geo {
+    border-top: 1px solid var(--vela-color-border);
+    flex-shrink: 0;
+}
+
+.geoBox {
+    background: var(--vela-color-bg3);
+    border: 1px solid var(--vela-color-border);
+    border-radius: 6px;
+    padding: 5px 8px;
+}
+
+.geoLabel {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.presetList {
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.presetRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--vela-color-border);
+    cursor: pointer;
+    transition:
+        border-color 0.12s,
+        background 0.12s;
+}
+
+.presetRow:hover,
+.presetRow[data-active="true"] {
+    border-color: var(--vela-accent);
+    background: var(--vela-accent-light);
+}
+
+.saved {
+    border-top: 1px solid var(--vela-color-border);
+    border-bottom: 1px solid var(--vela-color-border);
+    flex-shrink: 0;
+    max-height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.queryRow {
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.queryRow:hover,
+.queryRow:focus-visible {
+    background: var(--vela-color-bg3);
+}
+
+.queryRow[data-active="true"] {
+    background: var(--vela-accent-light);
+}
+
+.queryRow:hover .queryRowActions,
+.queryRow:focus-within .queryRowActions {
+    opacity: 1;
+}
+
+.queryRowName {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.queryRowDescription {
+    font-size: 10px;
+    font-family: var(--mantine-font-family-monospace);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.queryRowActions {
+    flex-shrink: 0;
+    opacity: 0;
+    display: flex;
+    gap: 2px;
+}

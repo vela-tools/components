@@ -1,0 +1,84 @@
+html .ConnectionStatusCard {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    width: 220px;
+    max-width: 260px;
+    max-height: 60px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--vela-color-bg);
+    border: 1px solid var(--vela-color-border);
+    border-radius: var(--mantine-radius-md);
+}
+
+html .ConnectionStatusCard[data-status="error"] {
+    border-color: var(--vela-color-red-700);
+}
+
+html .Clickable {
+    cursor: pointer;
+    transition:
+        background-color 120ms ease,
+        border-color 120ms ease;
+}
+
+html .Clickable:hover {
+    background-color: var(--vela-color-bg2);
+    border-color: var(--vela-color-border2);
+}
+
+html .Clickable:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+}
+
+html .Content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+html .StatusLine {
+    display: flex;
+    align-items: center;
+    column-gap: 0.3rem;
+    font-size: 0.625rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.0625rem;
+    color: var(--vela-color-text3);
+}
+
+html .Name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 0.9rem;
+    margin-bottom: 0.0625rem;
+    color: var(--vela-color-text);
+}
+
+html .Url {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+    color: var(--vela-color-text3);
+}
+
+html .Dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+html .DotConnecting {
+    background: var(--vela-color-yellow-800);
+}
+
+html .DotConnected {
+    background: var(--vela-color-green-700);
+}
+
+html .DotError {
+    background: var(--vela-color-red-700);
+}

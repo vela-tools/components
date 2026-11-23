@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/knip/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["scripts/*.mjs"],
+      "ignore": ["scripts/fixtures/**"]
+    },
+    "packages/*": {
+      "project": ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}"]
+    },
+    "apps/playground": {
+      "project": ["src/**/*.{ts,tsx}"]
+    }
+  }
+}

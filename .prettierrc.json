@@ -1,0 +1,10 @@
+{
+  "printWidth": 120,
+  "tabWidth": 4,
+  "overrides": [
+    {
+      "files": ["*.json", "*.yaml", "*.yml", "*.html"],
+      "options": { "tabWidth": 2 }
+    }
+  ]
+}

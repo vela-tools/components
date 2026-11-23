@@ -1,0 +1,33 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "link": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.9.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+  },
+  "body": [
+    {
+      "id": "https://example.org/vela/VirtualCameraSensor",
+      "type": "EntityType",
+      "typeName": "https://example.org/vela/VirtualCameraSensor",
+      "attributeNames": [
+        "https://example.org/vela/hasDevice",
+        "https://smartdatamodels.org/name",
+        "https://example.org/vela/separatorLine",
+        "https://example.org/vela/sensorType",
+        "https://example.org/vela/headingName"
+      ]
+    },
+    {
+      "id": "https://smartdatamodels.org/dataModel.Transportation/CrowdFlowObserved",
+      "type": "EntityType",
+      "typeName": "https://smartdatamodels.org/dataModel.Transportation/CrowdFlowObserved",
+      "attributeNames": [
+        "https://smartdatamodels.org/dataModel.Transportation/peopleCount",
+        "https://example.org/vela/hasSensor",
+        "https://smartdatamodels.org/dataModel.Transportation/dateObservedFrom",
+        "https://smartdatamodels.org/dataModel.Transportation/dateObservedTo",
+        "https://smartdatamodels.org/dateObserved"
+      ]
+    }
+  ]
+}

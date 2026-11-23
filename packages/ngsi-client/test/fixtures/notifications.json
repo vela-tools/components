@@ -1,0 +1,45 @@
+{
+  "status": 200,
+  "headers": { "content-type": "application/json" },
+  "body": [
+    {
+      "id": "urn:ngsi-ld:ScorpioNotification:1",
+      "type": "ScorpioNotification",
+      "subscriptionId": { "type": "Property", "value": "urn:ngsi-ld:Subscription:6f1c2a7e" },
+      "timestamp": { "type": "Property", "value": "2026-11-10T07:15:00Z" },
+      "source": { "type": "Property", "value": "ngsi-ld" },
+      "name": { "type": "Property", "value": "Crowd flow above 100 people" },
+      "entity_id": { "type": "Property", "value": "urn:ngsi-ld:CrowdFlowObserved:flow-2" },
+      "value": { "type": "Property", "value": 104 },
+      "threshold": { "type": "Property", "value": "100" },
+      "status": { "type": "Property", "value": "delivered" }
+    },
+    {
+      "id": "urn:ngsi-ld:ScorpioNotification:2",
+      "type": "ScorpioNotification",
+      "https://uri.etsi.org/ngsi-ld/default-context/subscriptionId": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:Subscription:6f1c2a7e"
+      },
+      "https://uri.etsi.org/ngsi-ld/default-context/timestamp": { "type": "Property", "value": "2026-11-10T08:00:00Z" },
+      "https://uri.etsi.org/ngsi-ld/default-context/source": { "type": "Property", "value": "combined" },
+      "https://uri.etsi.org/ngsi-ld/default-context/name": {
+        "type": "Property",
+        "value": "Crowd flow above 100 people"
+      },
+      "https://uri.etsi.org/ngsi-ld/default-context/entity_id": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:CrowdFlowObserved:flow-2"
+      },
+      "https://uri.etsi.org/ngsi-ld/default-context/value": { "type": "Property", "value": 131 },
+      "https://uri.etsi.org/ngsi-ld/default-context/status": { "type": "Property", "value": "failed" }
+    },
+    {
+      "id": "urn:ngsi-ld:ScorpioNotification:3",
+      "type": "ScorpioNotification",
+      "timestamp": { "type": "Property", "value": "2026-11-10T09:30:00Z" },
+      "name": { "type": "Property", "value": "Camera reports a fault" },
+      "status": { "type": "Property", "value": "delivered" }
+    }
+  ]
+}

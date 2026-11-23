@@ -1,0 +1,58 @@
+name: Bug report
+description: "Report a component, hook or adapter of Vela Components that behaves incorrectly."
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Please search the existing issues first, in case it is already reported.
+
+        Do not use this form to report a security vulnerability. Follow the [Vela Components security policy](https://github.com/vela-tools/components/security/policy) instead.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: A clear description of the incorrect behaviour, including the exact error message if there was one.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: Describe the correct behaviour. If it violates a specification, cite the clause.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: "A minimal component tree or adapter call that shows the problem, the broker you used, and the broker response involved, if any."
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "The versions from `npm ls @vela-tools/ui @vela-tools/ngsi @vela-tools/ngsi-client`."
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Sample input or configuration
+      description: A minimal sample that reproduces the problem. Remove any credentials, tokens, or private data first.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: "This is not a security vulnerability. Vulnerabilities are reported privately, following the [Vela Components security policy](https://github.com/vela-tools/components/security/policy)."
+          required: true
+        - label: I searched the existing issues and this is not a duplicate.
+          required: true
+        - label: I removed any credentials or private data from the report and samples above.
+          required: true

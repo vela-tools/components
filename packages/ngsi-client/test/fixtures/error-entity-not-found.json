@@ -1,0 +1,13 @@
+{
+  "status": 404,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "type": "https://uri.etsi.org/ngsi-ld/errors/ResourceNotFound",
+    "title": "Resource not found.",
+    "detail": "urn:ngsi-ld:Vela:does-not-exist was not found",
+    "instanceId": "urn:ngsi-ld:Vela:does-not-exist",
+    "status": 404
+  }
+}

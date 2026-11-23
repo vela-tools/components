@@ -1,0 +1,38 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "id": "https://example.org/vela/VirtualCameraSensor",
+    "type": "EntityTypeInfo",
+    "typeName": "https://example.org/vela/VirtualCameraSensor",
+    "entityCount": 12,
+    "attributeDetails": [
+      {
+        "id": "https://smartdatamodels.org/name",
+        "type": "Attribute",
+        "attributeName": "https://smartdatamodels.org/name",
+        "attributeTypes": ["Property"]
+      },
+      {
+        "id": "https://example.org/vela/hasDevice",
+        "type": "Attribute",
+        "attributeName": "https://example.org/vela/hasDevice",
+        "attributeTypes": ["Relationship"]
+      },
+      {
+        "id": "https://example.org/vela/separatorLine",
+        "type": "Attribute",
+        "attributeName": "https://example.org/vela/separatorLine",
+        "attributeTypes": ["GeoProperty"]
+      },
+      {
+        "id": "https://example.org/vela/legacy",
+        "type": "Attribute",
+        "attributeName": "https://example.org/vela/legacy",
+        "attributeTypes": ["LanguageProperty"]
+      }
+    ]
+  }
+}

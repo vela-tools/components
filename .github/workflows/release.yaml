@@ -1,0 +1,221 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "@vela-tools/*@[0-9]+.[0-9]+.[0-9]+"
+      - "@vela-tools/*@[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+"
+      - "@vela-tools/*@[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+"
+      - "@vela-tools/*@[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+"
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    uses: ./.github/workflows/format.yaml
+
+  lint:
+    uses: ./.github/workflows/lint.yaml
+
+  typecheck:
+    uses: ./.github/workflows/typecheck.yaml
+
+  test:
+    uses: ./.github/workflows/test.yaml
+
+  dependencies:
+    uses: ./.github/workflows/dependencies.yaml
+
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.package.outputs.package }}
+      name: ${{ steps.package.outputs.name }}
+      version: ${{ steps.package.outputs.version }}
+      latest: ${{ steps.type.outputs.latest }}
+      demote: ${{ steps.type.outputs.demote }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check that the tagged commit is on main
+        run: |
+          set -euo pipefail
+          commit="$(git rev-parse "${GITHUB_REF}^{commit}")"
+          if ! git merge-base --is-ancestor "$commit" origin/main; then
+            echo "${GITHUB_REF_NAME} points at ${commit}, which is not on main. Tag the release commit as it is on main." >&2
+            exit 1
+          fi
+
+      - name: Resolve the package from the tag
+        id: package
+        run: |
+          set -euo pipefail
+          if [[ ! "${GITHUB_REF_NAME}" =~ ^@vela-tools/([a-z0-9-]+)@([0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)\.[0-9]+)?)$ ]]; then
+            echo "${GITHUB_REF_NAME} is not a package release tag" >&2
+            exit 1
+          fi
+          name="${BASH_REMATCH[1]}"
+          version="${BASH_REMATCH[2]}"
+          manifest="packages/${name}/package.json"
+          if [[ ! -f "$manifest" ]]; then
+            echo "There is no package at packages/${name}" >&2
+            exit 1
+          fi
+          if [[ "$(jq -r .name "$manifest")" != "@vela-tools/${name}" || "$(jq -r '.private // false' "$manifest")" != false ]]; then
+            echo "${manifest} is not the published package @vela-tools/${name}" >&2
+            exit 1
+          fi
+          if [[ "$(jq -r .version "$manifest")" != "$version" ]]; then
+            echo "${manifest} is at $(jq -r .version "$manifest"), the tag is ${GITHUB_REF_NAME}" >&2
+            exit 1
+          fi
+          {
+            echo "package=@vela-tools/${name}"
+            echo "name=${name}"
+            echo "version=${version}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Determine release type
+        id: type
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NAME: ${{ steps.package.outputs.name }}
+          VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          set -euo pipefail
+          latest=true
+          if [[ "$VERSION" == *-* ]]; then
+            stable=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/git/matching-refs/tags/@vela-tools/${NAME}@" --jq '.[].ref' |
+              grep -E "^refs/tags/@vela-tools/${NAME}@[0-9]+\.[0-9]+\.[0-9]+$" || true)
+            if [[ -n "$stable" ]]; then
+              latest=false
+            fi
+          fi
+          demote=false
+          if [[ "$latest" == true && "$VERSION" == *-* ]]; then
+            demote=true
+          fi
+          echo "latest=${latest}" >> "$GITHUB_OUTPUT"
+          echo "demote=${demote}" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: [plan, format, lint, typecheck, test, dependencies]
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+
+      - run: npm ci --ignore-scripts
+
+      - run: npm run build
+
+      # NPM_TOKEN exists only until the package has a trusted publisher on npm; without it npm publishes through OIDC.
+      - name: Publish to npm with provenance
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PACKAGE: ${{ needs.plan.outputs.package }}
+          DIST_TAG: ${{ needs.plan.outputs.latest == 'true' && 'latest' || 'next' }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$NPM_TOKEN" ]]; then
+            npm config set "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" --location=user
+          fi
+          npm publish -w "$PACKAGE" --tag "$DIST_TAG"
+
+  release:
+    needs: [plan, publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve the release notes range
+        id: notes
+        env:
+          NAME: ${{ needs.plan.outputs.name }}
+        run: |
+          set -euo pipefail
+          range=""
+          if previous="$(git describe --tags --abbrev=0 --match "@vela-tools/${NAME}@[0-9]*" --exclude "@vela-tools/${NAME}@*-*" "${GITHUB_REF_NAME}^" 2>/dev/null)"; then
+            range="${previous}..${GITHUB_REF_NAME}"
+          fi
+          echo "range=${range}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        id: changelog
+        uses: orhun/git-cliff-action@v4
+        env:
+          GIT_CLIFF_TAG: ${{ github.ref_name }}
+        with:
+          config: cliff.toml
+          version: v2.14.2
+          args: >-
+            ${{ steps.notes.outputs.range }}
+            --include-path packages/${{ needs.plan.outputs.name }}/**
+            --tag-pattern ^@vela-tools/${{ needs.plan.outputs.name }}@[1-9][0-9]*[.]
+            --strip all
+
+      - name: Compose release body
+        env:
+          NOTES: ${{ steps.changelog.outputs.content }}
+          PACKAGE: ${{ needs.plan.outputs.package }}
+          VERSION: ${{ needs.plan.outputs.version }}
+        run: |
+          set -euo pipefail
+          printf '%s\n\n' "$NOTES" > release-body.md
+          {
+            echo "## Package"
+            echo
+            echo '```sh'
+            echo "npm install ${PACKAGE}@${VERSION}"
+            echo '```'
+            echo
+            echo "Published to npm by this workflow, with provenance. Verify the registry signatures and provenance attestations of the installed packages:"
+            echo
+            echo '```sh'
+            echo "npm audit signatures"
+            echo '```'
+          } >> release-body.md
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          draft: false
+          makeLatest: ${{ needs.plan.outputs.latest }}
+          prerelease: ${{ needs.plan.outputs.latest != 'true' }}
+          name: ${{ github.ref_name }}
+          bodyFile: release-body.md
+          token: ${{ github.token }}
+
+      - name: Mark earlier releases of the package as pre-releases
+        if: needs.plan.outputs.demote == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE: ${{ needs.plan.outputs.package }}
+        run: |
+          set -euo pipefail
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 1000 \
+            --json tagName,isPrerelease,isDraft \
+            --jq ".[] | select(.isPrerelease | not) | select(.isDraft | not) | select(.tagName | startswith(\"${PACKAGE}@\")) | select(.tagName != \"${GITHUB_REF_NAME}\") | .tagName" |
+            while read -r tag; do
+              gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --prerelease --latest=false
+            done

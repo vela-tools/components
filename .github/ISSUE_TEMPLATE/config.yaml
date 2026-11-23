@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/vela-tools/components/security/advisories/new
+    about: Never open a public issue for a vulnerability. Report it privately through GitHub private vulnerability reporting, following the Vela Components security policy.
+  - name: Documentation
+    url: "https://github.com/vela-tools/components#readme"
+    about: Read the README before opening an issue.
+  - name: Contact Vela Tools
+    url: https://velacontext.com/contactus
+    about: Commercial enquiries, or anything else that should not be discussed in a public issue.

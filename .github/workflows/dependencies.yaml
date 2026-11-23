@@ -1,0 +1,59 @@
+name: dependencies
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependencies-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    strategy:
+      fail-fast: false
+      matrix:
+        policy: [advisories, licenses, sources]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - if: matrix.policy == 'advisories'
+        uses: google/osv-scanner-action/osv-scanner-action@v2.7.1
+        with:
+          scan-args: |-
+            --config=osv-scanner.toml
+            --lockfile=package-lock.json
+            --x-flag-deprecated-packages
+
+      # Disabling the advisory matcher keeps this job to licences, so an advisory never fails it.
+      - if: matrix.policy == 'licenses'
+        uses: google/osv-scanner-action/osv-scanner-action@v2.7.1
+        with:
+          scan-args: |-
+            --config=osv-scanner.toml
+            --lockfile=package-lock.json
+            --x-disable-plugins=vulnmatch/osvdev
+            --licenses=MIT,Apache-2.0,BSD-2-Clause,BSD-3-Clause,ISC,Zlib,Unicode-3.0
+
+      - if: matrix.policy == 'sources'
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - if: matrix.policy == 'sources'
+        run: npm ci --ignore-scripts
+
+      - if: matrix.policy == 'sources'
+        run: npm run audit:sources

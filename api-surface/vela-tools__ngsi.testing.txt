@@ -1,0 +1,12 @@
+MockAdapterError
+MockAdapterOptions
+MockFixtures
+MockMethod
+createMockNgsiAdapter
+defaultMockFixtures
+fixtureEntities
+fixtureNotifications
+fixtureSavedQueries
+fixtureSubscriptions
+fixtureTemporal
+fixtureTypes

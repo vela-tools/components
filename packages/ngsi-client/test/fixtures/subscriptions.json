@@ -1,0 +1,44 @@
+{
+  "status": 200,
+  "headers": { "content-type": "application/json" },
+  "body": [
+    {
+      "id": "urn:ngsi-ld:Subscription:6f1c2a7e",
+      "type": "Subscription",
+      "description": "Crowd flow above 100 people",
+      "entities": [{ "type": "https://smartdatamodels.org/dataModel.Transportation/CrowdFlowObserved" }],
+      "watchedAttributes": ["peopleCount"],
+      "q": "peopleCount>100",
+      "isActive": true,
+      "status": "active",
+      "notification": {
+        "format": "keyValues",
+        "endpoint": {
+          "uri": "https://webhook.example.invalid/scorpiowebhook",
+          "accept": "application/json",
+          "receiverInfo": [
+            {
+              "channel": "email",
+              "endpoint": "ops@example.invalid",
+              "name": "Crowd flow above 100 people",
+              "entity": "CrowdFlowObserved",
+              "attribute": "peopleCount",
+              "threshold": "100",
+              "source": "ngsi-ld"
+            }
+          ]
+        },
+        "timesSent": 3,
+        "status": "ok"
+      }
+    },
+    {
+      "id": "urn:ngsi-ld:Subscription:91ab03d4",
+      "type": "Subscription",
+      "entities": [{ "type": "Camera" }],
+      "isActive": false,
+      "notification": { "endpoint": { "uri": "https://webhook.example.invalid/scorpiowebhook" } }
+    },
+    { "type": "Subscription", "description": "broken: no id" }
+  ]
+}

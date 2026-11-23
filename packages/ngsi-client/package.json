@@ -1,0 +1,63 @@
+{
+  "name": "@vela-tools/ngsi-client",
+  "version": "1.0.0",
+  "description": "Reference NGSI-LD adapter (fetch, headers, validation) implementing the @vela-tools/ngsi contract",
+  "keywords": [
+    "ngsi-ld",
+    "fiware",
+    "context-broker",
+    "client",
+    "adapter",
+    "fetch"
+  ],
+  "license": "EUPL-1.2",
+  "homepage": "https://github.com/vela-tools/components/tree/main/packages/ngsi-client#readme",
+  "bugs": {
+    "url": "https://github.com/vela-tools/components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vela-tools/components.git",
+    "directory": "packages/ngsi-client"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "NOTICE.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "lint": "eslint src test --max-warnings 0",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo",
+    "prepack": "cp ../../LICENSE.md ../../NOTICE.md .",
+    "postpack": "rm -f LICENSE.md NOTICE.md"
+  },
+  "dependencies": {
+    "zod": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@vela-tools/ngsi": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vela-tools/ngsi": "^1.0.0",
+    "vitest": "^5.1.0"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "@vela-tools/ui",
+  "version": "1.0.0",
+  "description": "Vela primitive parts, leaves, theme and design tokens",
+  "keywords": [
+    "react",
+    "mantine",
+    "components",
+    "design-system",
+    "ngsi-ld",
+    "fiware"
+  ],
+  "license": "EUPL-1.2",
+  "homepage": "https://github.com/vela-tools/components/tree/main/packages/ui#readme",
+  "bugs": {
+    "url": "https://github.com/vela-tools/components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vela-tools/components.git",
+    "directory": "packages/ui"
+  },
+  "type": "module",
+  "sideEffects": [
+    "**/*.css",
+    "./dist/fonts.js"
+  ],
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "NOTICE.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./fonts": {
+      "types": "./dist/types/fonts.d.ts",
+      "default": "./dist/fonts.js"
+    },
+    "./styles.css": "./dist/index.css"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "lint": "eslint src test --max-warnings 0",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo",
+    "prepack": "cp ../../LICENSE.md ../../NOTICE.md .",
+    "postpack": "rm -f LICENSE.md NOTICE.md"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "clsx": "^2.1.1",
+    "tabulator-tables": "^6.7.1"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^9.0.0",
+    "@mantine/hooks": "^9.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@mantine/core": "^9.4.1",
+    "@mantine/hooks": "^9.4.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/tabulator-tables": "^6.3.6",
+    "jsdom": "^31.0.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vitest": "^5.1.0"
+  }
+}

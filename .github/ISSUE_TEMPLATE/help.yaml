@@ -1,0 +1,39 @@
+name: Help and questions
+description: "Ask how to accomplish something with Vela Components."
+title: "[Help]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a look at the [README](https://github.com/vela-tools/components#readme) first.
+        Use this form for usage questions; if something is actually broken, use the Bug report form instead.
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to do?
+      description: Describe the goal and what you expect to get out of it.
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: The command or configuration you are working with, and what happened.
+      render: shell
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "The versions from `npm ls @vela-tools/ui @vela-tools/ngsi @vela-tools/ngsi-client`."
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked the documentation and the existing issues.
+          required: true

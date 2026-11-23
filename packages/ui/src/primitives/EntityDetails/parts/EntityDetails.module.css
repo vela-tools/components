@@ -1,0 +1,7 @@
+.table :global(.tabulator-header) {
+    border-top: none;
+}
+
+.table :global(.tabulator-col-content) {
+    background-color: var(--vela-color-bg3);
+}

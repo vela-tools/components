@@ -1,0 +1,52 @@
+.root {
+    --token-jsonld: #7c3aed;
+    --token-key: #1e6eb0;
+    --token-string: #1a7940;
+    --token-number: #c2410c;
+    --token-boolean: #0c6291;
+    --token-punctuation: #9ca3af;
+    --token-uri: #e03131;
+    --token-plain: #374151;
+    --line-number-color: #d1d5db;
+
+    flex: 1;
+    background: #fcfcfc;
+    font-family: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 8px 0;
+}
+
+.line {
+    display: flex;
+    align-items: baseline;
+    padding: 0 24px 0 0;
+    min-width: max-content;
+}
+
+.lineNumber {
+    user-select: none;
+    text-align: right;
+    min-width: 40px;
+    padding-right: 20px;
+    color: var(--line-number-color);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.lineContent {
+    flex: 1;
+    white-space: pre;
+    color: var(--token-plain);
+}
+
+.empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
+    background: #fafafa;
+    font-family: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+}

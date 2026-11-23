@@ -1,0 +1,35 @@
+# Dependency policy for the dependencies workflow. osv-scanner reads it for both the advisories and the
+# licences check. The allowed licences are passed with --licenses in .github/workflows/dependencies.yaml,
+# from the allowed list of the Vela Tools licensing policy. Every entry here states what it covers
+# and why it is tolerable; an ignored advisory also carries ignoreUntil, so it is re-checked.
+
+[[PackageOverrides]]
+group = "dev"
+license.ignore = true
+reason = "Development tooling is not in the published packages and is never installed by a consumer, so its licence does not travel with Vela Components. Its advisories are still checked."
+
+[[PackageOverrides]]
+name = "@vela-tools/.*"
+nameIsRegex = true
+ecosystem = "npm"
+license.ignore = true
+reason = "The project's own packages, under EUPL-1.2. EUPL-1.2 is allowed for the project's own packages only, so it is not in the allowed list, where it would also admit third-party EUPL packages."
+
+[[PackageOverrides]]
+name = "playground"
+ecosystem = "npm"
+license.ignore = true
+reason = "The private development app in apps/playground. It is never published."
+
+[[PackageOverrides]]
+name = "tslib"
+ecosystem = "npm"
+license.ignore = true
+reason = "0BSD, a public-domain-equivalent permissive licence that the licensing policy proposes for the default list and handles as a per-package exception until then. Reached through Mantine's dependencies."
+
+[[PackageOverrides]]
+name = "@fontsource-variable/geist.*"
+nameIsRegex = true
+ecosystem = "npm"
+license.ignore = true
+reason = "The Geist font files that @vela-tools/ui/fonts loads, under OFL-1.1, the licence the licensing policy proposes for fonts. OFL-1.1 allows bundling the fonts with software under any licence, and its terms bind only the font files."

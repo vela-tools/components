@@ -1,0 +1,6 @@
+InvalidItem
+NgsiClientError
+NgsiLdAdapterOptions
+NgsiLdClientConfig
+NgsiValidationError
+createNgsiLdAdapter

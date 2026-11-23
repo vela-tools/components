@@ -1,0 +1,86 @@
+{
+  "name": "@vela-tools/ngsi",
+  "version": "1.0.0",
+  "description": "NGSI-LD runtime, adapter interfaces, hooks, primitives and composites",
+  "keywords": [
+    "ngsi-ld",
+    "fiware",
+    "context-broker",
+    "react",
+    "hooks",
+    "smart-data-models"
+  ],
+  "license": "EUPL-1.2",
+  "homepage": "https://github.com/vela-tools/components/tree/main/packages/ngsi#readme",
+  "bugs": {
+    "url": "https://github.com/vela-tools/components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vela-tools/components.git",
+    "directory": "packages/ngsi"
+  },
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "NOTICE.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./testing": {
+      "types": "./dist/types/testing/index.d.ts",
+      "default": "./dist/testing.js"
+    },
+    "./query": {
+      "types": "./dist/types/query/index.d.ts",
+      "default": "./dist/query.js"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "lint": "eslint src test --max-warnings 0",
+    "test": "vitest run",
+    "clean": "rm -rf dist .turbo",
+    "prepack": "cp ../../LICENSE.md ../../NOTICE.md .",
+    "postpack": "rm -f LICENSE.md NOTICE.md"
+  },
+  "dependencies": {
+    "@types/geojson": "^7946.0.16"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^9.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@vela-tools/ui": "^1.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@mantine/core": "^9.4.1",
+    "@tanstack/react-query": "^5.101.2",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vela-tools/ui": "^1.0.0",
+    "jsdom": "^31.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vitest": "^5.1.0"
+  }
+}

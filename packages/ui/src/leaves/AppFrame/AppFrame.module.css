@@ -1,0 +1,119 @@
+.AppFrame {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--vela-color-bg);
+    color: var(--vela-color-text);
+}
+
+.Main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.Masthead {
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    background: var(--vela-accent);
+    color: #fff;
+    font-family: var(--mantine-font-family);
+}
+
+.Brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.Icon > img,
+.Icon > svg {
+    width: 20px;
+    height: 20px;
+}
+
+.BrandName {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.Separator {
+    color: rgba(255, 255, 255, 0.5);
+    user-select: none;
+}
+
+.AppName {
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.End {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.Edition {
+    padding: 0 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 10px;
+    line-height: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.Version {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.ToolBar {
+    min-height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 16px;
+    background: var(--vela-color-bg);
+    border-bottom: 1px solid var(--vela-color-border);
+}
+
+.StatusBar {
+    height: 26px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+    background: var(--vela-color-bg2);
+    border-top: 1px solid var(--vela-color-border);
+    color: var(--vela-color-text3);
+    font-size: 11px;
+    line-height: 16px;
+}
